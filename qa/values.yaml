@@ -47,4 +47,4 @@ autoscaling:
   cpuUtilization: 70
 
 app:
-  profile: dev
+  profile: qa

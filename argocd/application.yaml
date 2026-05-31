@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/hareeshn903/atoz.git
+    repoURL: https://github.com/hareeshn903/atoz-gitops.git
     targetRevision: HEAD
     path: helm/mini-account-management
 

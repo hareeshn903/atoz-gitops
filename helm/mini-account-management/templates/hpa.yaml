@@ -5,7 +5,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 
 metadata:
-  name: mini-account-management
+  name: {{ include "mini-account-management.fullname" . }}
 
 spec:
 

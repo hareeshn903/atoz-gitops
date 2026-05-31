@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: mini-account-management
+  name: {{ include "mini-account-management.fullname" . }}
 
 spec:
   type: {{ .Values.service.type }}

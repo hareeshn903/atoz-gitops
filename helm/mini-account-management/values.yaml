@@ -1,9 +1,11 @@
 replicaCount: 2
 
 image:
-  repository: mini-account-management
+  repository: "hareeshn903/atoz-app"
   tag: latest
 
+serviceAccount:
+  create: true
 
 service:
   type: ClusterIP
@@ -48,3 +50,11 @@ autoscaling:
 
 app:
   profile: dev
+
+podAnnotations: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

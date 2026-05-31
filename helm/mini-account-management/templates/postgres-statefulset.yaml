@@ -41,15 +41,11 @@ spec:
               mountPath: /var/lib/postgresql/data
 
   volumeClaimTemplates:
- 
     - metadata:
         name: postgres-storage
-
       spec:
-
         accessModes:
           - ReadWriteOnce
-
         resources:
 
           requests:

@@ -7,7 +7,7 @@ metadata:
 
 spec:
   replicas: {{ .Values.replicaCount }}
-
+  
   selector:
     matchLabels:
       app: mini-account-management
@@ -20,6 +20,8 @@ spec:
 
     spec:
 
+      serviceAccountName: {{ include "mini-account-management.fullname" . }}-sa
+
       containers:
 
         - name: mini-account-management
@@ -30,6 +32,11 @@ spec:
             - containerPort: 8080
 
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: SPRING_PROFILES_ACTIVE
 
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://postgres:5432/{{ .Values.postgres.database }}
@@ -44,20 +51,24 @@ spec:
                   key: POSTGRES_PASSWORD
 
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
 
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: 8080
-
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 10
 
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/readiness
               port: 8080
-
-            initialDelaySeconds: 30
+            initialDelaySeconds: 20
             periodSeconds: 5
