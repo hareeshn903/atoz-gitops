@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: "hareeshn903/atoz-app"
-  tag: "${IMAGE_TAG}"
+  tag: 58
 
 serviceAccount:
   create: true
